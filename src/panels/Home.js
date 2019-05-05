@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel, PanelHeader, Search, Group, Footer, List, Cell } from '@vkontakte/vkui';
+import { Panel, PanelHeader, HeaderButton, Search, Group, Footer, List, Cell } from '@vkontakte/vkui';
 import '../style/style.css'
 import image1 from '../img/image1.png';
 import image2 from '../img/image2.png';
+import Icon24Info from '@vkontakte/icons/dist/24/info';
 
 const Home = props => (
 	<Panel id={props.id}>
-		<PanelHeader noShadow>Карта</PanelHeader>
+		<PanelHeader noShadow left={<HeaderButton onClick={props.go} data-to="about"><Icon24Info/></HeaderButton>}>
+			Карта
+		</PanelHeader>
 		<Search value={ props.state.search } onChange={ props.change } />
 		{ props.state.search.length > 0 ? (
 			<div>
