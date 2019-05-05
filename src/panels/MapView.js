@@ -11,7 +11,7 @@ const osname = platform();
 const MapView = props => (
 	<Panel id={props.id}>
         <PanelHeader
-			noShadow left={<HeaderButton onClick={props.go} data-to="home">
+			noShadow left={<HeaderButton onClick={() => window.history.back()} >
 				{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
 			</HeaderButton>}
 		>

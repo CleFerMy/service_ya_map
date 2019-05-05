@@ -16,7 +16,7 @@ const osname = platform();
 const About = props => (
 	<Panel id={props.id}>
 		<PanelHeader
-			noShadow left={<HeaderButton onClick={props.go} data-to="home">
+			noShadow left={<HeaderButton onClick={() => window.history.back()}>
 				{osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
 			</HeaderButton>}
 		>
@@ -26,7 +26,8 @@ const About = props => (
         <Footer>Поиск по Яндекс картам</Footer>
         <Group>
             <List>
-                <Cell multiline={true} target="_blank" href="https://vk.com/@clefer-vkapps-api" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Flash	fill="#fff" /></Avatar> } description="https://vk.com/@clefer-vkapps-api">Статья</Cell>
+                <Cell multiline={true} target="_blank" href="https://vk.com/@clefer-vkapps-api" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Flash	fill="#fff" /></Avatar> } description="https://vk.com/@clefer-vkapps-api">Статья о API и картах</Cell>
+                <Cell multiline={true} target="_blank" href="https://vk.com/@clefer-vkapps-menu" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Flash	fill="#fff" /></Avatar> } description="https://vk.com/@clefer-vkapps-menu">Статья о навигации</Cell>
                 <Cell multiline={true} target="_blank" href="https://github.com/CleFerMy/service_ya_map" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Download	fill="#fff" /></Avatar> } description="https://github.com/CleFerMy/service_ya_map">Исходники</Cell>
                 <Cell multiline={true} target="_blank" href="https://tech.yandex.ru/maps/" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Link	fill="#fff" /></Avatar> } description="https://tech.yandex.ru/maps/">API Яндекс карт</Cell>
                 <Cell multiline={true} target="_blank" href="https://github.com/gribnoysup/react-yandex-maps" before={ <Avatar style={ { background: '#5C9CE6' } } size={36}><Icon24Place	fill="#fff" /></Avatar> } description="https://github.com/gribnoysup/react-yandex-maps">react-yandex-maps</Cell>

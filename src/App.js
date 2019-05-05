@@ -21,6 +21,8 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
+		window.addEventListener('popstate', e => e.preventDefault() & this.menu(e));
+		window.history.pushState( { panel: 'home' }, `home` );
 		connect.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
@@ -33,7 +35,8 @@ class App extends React.Component {
 	}
 
 	go = (e) => {
-		this.setState({ activePanel: e.currentTarget.dataset.to })
+		this.setState({ activePanel: e.currentTarget.dataset.to });
+		window.history.pushState( { panel: e.currentTarget.dataset.to }, `${e.currentTarget.dataset.to}` );
 	};
 
 	ChangeSearch (e) { 
@@ -53,6 +56,15 @@ class App extends React.Component {
 
 	view = (e) => {
 		this.setState({ pos: e.GeoObject.Point.pos.split(' ', 2).reverse() });
+	}
+
+	menu (e) {
+		if(e.state) {
+			this.setState( { activePanel: e.state.panel } );
+		} else {
+			this.setState( { activePanel: 'home', search: '' } );
+			window.history.pushState( { panel: 'home' }, `home` );
+		}
 	}
 
 	render() {
