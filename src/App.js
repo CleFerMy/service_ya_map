@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from '@vkontakte/vkui-connect';
+import bridge from '@vkontakte/vk-bridge';
 import { View } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -23,7 +23,7 @@ class App extends React.Component {
 	componentDidMount() {
 		window.addEventListener('popstate', e => e.preventDefault() & this.menu(e));
 		window.history.pushState( { panel: 'home' }, `home` );
-		connect.subscribe((e) => {
+		bridge.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
 					this.setState({ fetchedUser: e.detail.data });
@@ -31,7 +31,7 @@ class App extends React.Component {
 				default:
 			}
 		});
-		connect.send('VKWebAppGetUserInfo', {});
+		bridge.send('VKWebAppGetUserInfo', {});
 	}
 
 	go = (e) => {
@@ -39,13 +39,16 @@ class App extends React.Component {
 		window.history.pushState( { panel: e.currentTarget.dataset.to }, `${e.currentTarget.dataset.to}` );
 	};
 
+	back () { window.history.back(); }
+
 	ChangeSearch (e) { 
-		this.setState({ search:e.replace(/\s+/g,' ') });
+		this.setState({ search:e.target.value.replace(/\s+/g,' ') }); 
 		this.maps();
 	}
 
 	maps() {
-		let api = `https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${this.state.search}`
+		let key = `2fcdfa38-f379-48fa-a79a-e2da8afbf65b`;
+		let api = `https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${this.state.search}&apikey=${key}`;
 		fetch(api)
 		.then(res => res.json())
         .then(data => this.setState({
@@ -70,9 +73,9 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} change={this.ChangeSearch} state={this.state} view={this.view} />
-				<MapView id="view" fetchedUser={this.state.fetchedUser} go={this.go} state={this.state} />
-				<About id="about" go={this.go} />
+				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} change={this.ChangeSearch} state={this.state} view={this.view} back={this.back} />
+				<MapView id="view" fetchedUser={this.state.fetchedUser} go={this.go} state={this.state} back={this.back} />
+				<About id="about" go={this.go} back={this.back} />
 			</View>
 		);
 	}
