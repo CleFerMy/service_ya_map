@@ -6,6 +6,7 @@
 * [https://vk.com/app6971422](https://vk.com/app6971422) — сервис в VK
 * [/service_ya_map](https://clefermy.github.io/service_ya_map) — build github
 * [Работа с API и Яндекс картами в приложении VKApps](https://vk.com/@clefer-vkapps-api) — статья в VK о подробной разработке.
+* [Переход по панелям с помощью аппаратных кнопок в VK Mini Apps](https://vk.com/@clefer-vkapps-menu) - статья о переходах
 
 ## Сборка приложения
 У вас должен быть установлен [Node.js](https://nodejs.org/en/) и [Git](https://git-scm.com/downloads).
